@@ -6,7 +6,7 @@ export default defineConfig({
   description: "TechEdenNotes，融合技术探索与生活分享，记录点滴思考，分享独特体验。",
   head: [['link', { rel: 'icon', href: '/logo.png' }]],
   lang: 'zh-CN',
-  base: '/',
+  base: '/TechEdenNotes',
   srcDir: './src',
   lastUpdated: true,
   themeConfig: {
