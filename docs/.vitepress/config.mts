@@ -7,7 +7,6 @@ export default defineConfig({
   head: [['link', { rel: 'icon', href: '/logo.png' }]],
   lang: 'zh-CN',
   base: '/TechEdenNotes',
-  srcDir: './src',
   lastUpdated: true,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config

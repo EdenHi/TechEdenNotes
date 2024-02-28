@@ -1,3 +1,7 @@
+---
+title: Markdown Extension Examples
+date: 2023-01-10
+---
 # Markdown Extension Examples
 
 This page demonstrates some of the built-in markdown extensions provided by VitePress.

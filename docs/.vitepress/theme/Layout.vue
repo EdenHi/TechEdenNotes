@@ -1,4 +1,4 @@
-<!--.vitepress/theme/MyLayout.vue-->
+<!--.vitepress/theme/Layout.vue-->
 <script setup>
 import DefaultTheme from 'vitepress/theme'
 

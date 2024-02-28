@@ -25,4 +25,7 @@ hero:
 #  - title: Feature B
 #    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
-
+<script setup>
+import TimeLine from './components/TimeLine.vue'
+</script>
+<TimeLine />
