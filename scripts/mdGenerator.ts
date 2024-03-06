@@ -6,13 +6,13 @@ const rl = createInterface({
     output: process.stdout,
 });
 
-function promptUser(question) {
+function promptUser(question: string): Promise<string> {
     return new Promise((resolve) => {
         rl.question(question, resolve);
     });
 }
 
-async function generateMarkdown() {
+async function generateMarkdown(): Promise<void> {
     const title = await promptUser('Enter document title: ') || 'Default Title';
     const isDefault = (await promptUser('Is it a default page? (true/false): ') || 'false').toLowerCase() === 'true';
     const img = await promptUser('Enter image URL or leave blank: ') || '';
@@ -30,7 +30,7 @@ describe: ${describe}
 ---`;
 
     const fileName = `/${title.toLowerCase().replace(/\s/g, '-')}.md`;
-    const filePath = process.env.INIT_CWD + fileName
+    const filePath = process.env.INIT_CWD + fileName;
     try {
         await fsPromises.writeFile(filePath, markdownContent);
         console.log(`Markdown file "${fileName}" created successfully at ${filePath}`);
@@ -41,7 +41,7 @@ describe: ${describe}
     }
 }
 
-function getCurrentDate() {
+function getCurrentDate(): string {
     const now = new Date();
     const year = now.getFullYear();
     const month = now.getMonth() + 1;
@@ -49,4 +49,6 @@ function getCurrentDate() {
     return `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
 }
 
-generateMarkdown();
+generateMarkdown().then(() => {
+    /**/
+})

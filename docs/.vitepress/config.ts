@@ -1,5 +1,6 @@
 import {defineConfig} from 'vitepress'
 import {fileURLToPath, URL} from 'node:url'
+import UnoCSS from 'unocss/vite'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
     title: "TechEdenNotes",
@@ -9,12 +10,15 @@ export default defineConfig({
     base: '/TechEdenNotes',
     lastUpdated: true,
     vite: {
+        plugins: [
+            UnoCSS()
+        ],
         resolve: {
             alias: [
                 {
                     find: /^.*\/VPSidebar\.vue$/,
                     replacement: fileURLToPath(
-                        new URL('./theme/MyVpSideBar.vue', import.meta.url)
+                        new URL('./theme/components/MyVpSideBar.vue', import.meta.url)
                     )
                 }
             ]

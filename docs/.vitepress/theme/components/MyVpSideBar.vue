@@ -4,14 +4,14 @@ import {inBrowser, useRoute} from 'vitepress'
 import {ref, watch, computed} from 'vue'
 import {useSidebar} from "vitepress/theme";
 import VPSidebarItem from 'vitepress/dist/client/theme-default/components/VPSidebarItem.vue'
-import sideBarGenerator from "../sidebarGenerator";
+import sideBarGenerator from "../../../../scripts/sidebarGenerator";
 
 const {hasSidebar} = useSidebar()
 const route = useRoute()
 const props = defineProps<{
   open: boolean
 }>()
-const sidebarGroups = computed(() => {
+const sidebarGroups = computed<any[]>(() => {
   const path = decodeURIComponent(route.path).split('/')
   return sideBarGenerator(`/${path[2]}/${path[3]}/`)
 })
@@ -40,7 +40,6 @@ watch(
       ref="navEl"
       @click.stop
   >
-    555555555
     <div class="curtain"/>
 
     <nav class="nav" id="VPSidebarNav" aria-labelledby="sidebar-aria-label" tabindex="-1">

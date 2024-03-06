@@ -1,4 +1,4 @@
-import {data} from './theme/posts.data.js'
+import {data} from './posts.data'
 
 export default function (path: string) {
     const result = {}

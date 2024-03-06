@@ -1,5 +1,5 @@
 <template>
-  <div id="doc-container">
+  <div id="doc-container" ref="listRef">
     <div class="doc-outer-box">
       <div class="doc-item" @click="router.go(withBase(post.url||''))" v-for="post in showItems" :key="post.url">
         <img class="illustration" :src="withBase(post.frontmatter.img||'')" alt="">
@@ -10,16 +10,23 @@
         </div>
       </div>
     </div>
-    <div class="sidebar" v-if="monthGroup.length">
-      <a v-for="li in monthGroup">{{ li }}</a>
+    <div class="resume xl-flex sm-hidden" ref="resumeRef">
+      <div class="flex p-5 justify-between">
+        <img src="https://avatars.githubusercontent.com/u/90376120?s=400&u=b647b1d8d7273465a9cf3800ed76d9a10db170e1&v=4"
+             class="w-30 h-30 rounded-36" alt="avatar">
+        <div class="flex flex-col flex-1 justify-between ml-8 text-2xl">
+          <span>Eden</span>
+          <span>男</span>
+          <span>23</span>
+        </div>
+      </div>
     </div>
-    <hr id="hr"/>
   </div>
 </template>
 
 <script setup lang="ts">
-import {ref, onMounted, computed} from 'vue'
-import {data as posts} from './posts.data.js'
+import {ref, onMounted, onUnmounted} from 'vue'
+import {data as posts} from '../../../../scripts/posts.data'
 import {useData, useRouter, withBase} from "vitepress";
 
 const router = useRouter()
@@ -29,13 +36,6 @@ const config = {
   SHOW_NUM: 4,
   TOTAL_NUM: posts.length
 }
-const monthGroup = ref<string[]>([])
-const dayjsCDN = document.createElement('script')
-dayjsCDN.setAttribute('src', 'https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js')
-document.head.appendChild(dayjsCDN)
-dayjsCDN.onload = () => {
-  monthGroup.value = Array.from(new Set(posts.map(post => (window as any).dayjs(post.frontmatter.date).format('YYYY年M月'))))
-}
 
 const showItems = ref(posts.slice(0, config.SHOW_NUM - 1))
 
@@ -44,22 +44,42 @@ const loadData = () => {
   showItems.value = [...showItems.value, ...posts.slice(prevLength, prevLength + config.SHOW_NUM)]
 }
 const disableLoad = ref(false)
-onMounted(() => {
-  window.addEventListener('scroll', function () {
-    if (disableLoad.value) return
-    const documentHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
-    const windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-    const scrollPosition = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-    if (scrollPosition + windowHeight >= documentHeight - 10) {
-      loadData()
+const listRef = ref<HTMLElement>()
+const resumeRef = ref<HTMLElement>()
+const onScroll = () => {
+  if (disableLoad.value) return
+  if (listRef.value && resumeRef.value) {
+    if (!resumeRef.value.style.position) resumeRef.value.style.position = 'absolute'
+    const top = listRef.value?.getBoundingClientRect().top
+    const margin = listRef.value?.getBoundingClientRect().left.toFixed()
+    if (resumeRef.value.style.position === 'absolute' && top < 100) {
+      resumeRef.value.style.position = 'fixed'
+      resumeRef.value.style.top = '100px'
+      resumeRef.value.style.right = margin + 'px'
+    } else if (resumeRef.value.style.position === 'fixed' && top > 100) {
+      resumeRef.value.style.position = 'absolute'
+      resumeRef.value.style.top = '0'
+      resumeRef.value.style.right = '0'
     }
-  });
+  }
+  const documentHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+  const windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+  const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+  if (scrollPosition + windowHeight >= documentHeight - 10) {
+    loadData()
+  }
+}
+onMounted(() => {
+  window.addEventListener('scroll', onScroll);
+})
+onUnmounted(() => {
+  window.removeEventListener('scroll', onScroll)
 })
 </script>
 <style scoped>
 #doc-container {
-  display: flex;
-  justify-content: space-between;
+  //display: flex;
+  //justify-content: space-between;
 }
 
 @media screen and (min-width: 900px) {
@@ -77,10 +97,6 @@ onMounted(() => {
     width: 200px;
     height: 200px;
   }
-
-  .sidebar {
-    display: flex;
-  }
 }
 
 @media screen and (max-width: 900px) {
@@ -96,10 +112,6 @@ onMounted(() => {
   .illustration {
     width: 15vw;
     height: 15vw;
-  }
-
-  .sidebar {
-    display: none;
   }
 }
 
@@ -147,19 +159,16 @@ onMounted(() => {
   -webkit-line-clamp: 3; /* 显示的行数 */
 }
 
-.sidebar {
-  max-height: 400px;
-  width: 200px;
+.resume {
+  width: 300px;
+  height: auto;
   background-color: var(--vp-c-bg-alt);
   border-radius: 10px;
-  position: sticky;
-  top: 100px;
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
-  padding-left: 20px;
-  font-size: 20px;
-  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .sidebar > a {

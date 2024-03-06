@@ -26,6 +26,6 @@ hero:
 #    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
 <script setup>
-import TimeLine from '.vitepress/theme/TimeLine.vue'
+import TimeLine from '.vitepress/theme/components/TimeLine.vue'
 </script>
 <TimeLine />
