@@ -4,7 +4,7 @@ import {inBrowser, useRoute} from 'vitepress'
 import {ref, watch, computed} from 'vue'
 import {useSidebar} from "vitepress/theme";
 import VPSidebarItem from 'vitepress/dist/client/theme-default/components/VPSidebarItem.vue'
-import sideBarGenerator from "../sideBarGenerator";
+import sideBarGenerator from "../sidebarGenerator";
 
 const {hasSidebar} = useSidebar()
 const route = useRoute()

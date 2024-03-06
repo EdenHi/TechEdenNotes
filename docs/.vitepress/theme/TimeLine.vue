@@ -10,7 +10,7 @@
         </div>
       </div>
     </div>
-    <div class="sidebar">
+    <div class="sidebar" v-if="monthGroup.length">
       <a v-for="li in monthGroup">{{ li }}</a>
     </div>
     <hr id="hr"/>

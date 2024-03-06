@@ -6,9 +6,10 @@
   "scripts": {
     "dev": "vitepress dev docs",
     "build": "vitepress build docs",
-    "preview": "vitepress preview docs"
+    "preview": "vitepress preview docs",
+    "create-md": "node mdGenerator.js"
   },
   "dependencies": {
-    "csv-parse": "^5.5.4"
+
   }
 }
