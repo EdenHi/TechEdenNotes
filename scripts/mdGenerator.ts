@@ -14,7 +14,6 @@ function promptUser(question: string): Promise<string> {
 
 async function generateMarkdown(): Promise<void> {
     const title = await promptUser('Enter document title: ') || 'Default Title';
-    const isDefault = (await promptUser('Is it a default page? (true/false): ') || 'false').toLowerCase() === 'true';
     const img = await promptUser('Enter image URL or leave blank: ') || '';
     const date = await promptUser('Enter date (e.g., 2024-03-06): ') || getCurrentDate();
     const tags = (await promptUser('Enter tags (comma-separated): ') || '').split(',').map(tag => tag.trim());
@@ -22,7 +21,6 @@ async function generateMarkdown(): Promise<void> {
 
     const markdownContent = `---
 title: ${title}
-default: ${isDefault}
 img: ${img}
 date: ${date}
 tags: [${tags}]

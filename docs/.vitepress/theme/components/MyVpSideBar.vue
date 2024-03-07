@@ -13,6 +13,7 @@ const props = defineProps<{
 }>()
 const sidebarGroups = computed<any[]>(() => {
   const path = decodeURIComponent(route.path).split('/')
+  console.log(sideBarGenerator(`/${path[2]}/${path[3]}/`))
   return sideBarGenerator(`/${path[2]}/${path[3]}/`)
 })
 

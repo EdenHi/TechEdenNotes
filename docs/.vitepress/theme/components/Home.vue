@@ -13,24 +13,27 @@
     <div class="resume xl-flex sm-hidden" ref="resumeRef">
       <div class="flex p-5 justify-between">
         <img src="https://avatars.githubusercontent.com/u/90376120?s=400&u=b647b1d8d7273465a9cf3800ed76d9a10db170e1&v=4"
-             class="w-30 h-30 rounded-36" alt="avatar">
-        <div class="flex flex-col flex-1 justify-between ml-8 text-2xl">
+             class="w-20 h-20 rounded-36" alt="avatar">
+        <div class="flex flex-col flex-1 justify-between text-2xl text-right">
           <span>Eden</span>
-          <span>男</span>
-          <span>23</span>
+          <span>Yi Zhang</span>
         </div>
       </div>
+      <hr class="!mt-0">
+      <div class="h-60"></div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import {ref, onMounted, onUnmounted} from 'vue'
-import {data as posts} from '../../../../scripts/posts.data'
+import {data} from '../../../../scripts/posts.data'
 import {useData, useRouter, withBase} from "vitepress";
 
 const router = useRouter()
 const {isDark} = useData()
+console.log(data)
+const posts = data.filter(i => !i.frontmatter.default)
 
 const config = {
   SHOW_NUM: 4,

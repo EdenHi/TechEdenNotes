@@ -32,7 +32,7 @@ export default defineConfig({
         nav: [
             {
                 text: '技术总结',
-                link: '/posts/技术总结/简介/基本信息'
+                link: '/posts/技术总结/1-简介/基本信息'
             },
             {
                 text: '日常分享',
@@ -40,7 +40,7 @@ export default defineConfig({
             },
             {
                 text: '本站详情',
-                link: '/posts/本站详情/简介/基本信息'
+                link: '/posts/本站详情/1-简介/基本信息'
             },
         ],
         sidebar: {

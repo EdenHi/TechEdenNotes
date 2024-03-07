@@ -9,23 +9,8 @@ hero:
   image:
     src: /home.png
     alt: VitePress
-#  actions:
-#    - theme: brand
-#      text: Markdown Examples
-#      link: /markdown-examples
-#    - theme: alt
-#      text: API Examples
-#      link: /api-examples
-
-#features:
-#  - icon: 🛠️
-#    title: 工具
-##    details: Lorem ipsum...
-#    link: /tools/markdown-examples
-#  - title: Feature B
-#    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
 <script setup>
-import TimeLine from '.vitepress/theme/components/TimeLine.vue'
+import Home from '.vitepress/theme/components/Home.vue'
 </script>
-<TimeLine />
+<Home />
