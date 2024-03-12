@@ -11,6 +11,6 @@ hero:
     alt: VitePress
 ---
 <script setup>
-import Home from '.vitepress/theme/components/Home.vue'
+import RecentList from '.vitepress/theme/components/RecentList.vue'
 </script>
-<Home />
+<RecentList />

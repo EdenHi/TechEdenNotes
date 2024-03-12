@@ -11,9 +11,8 @@ const route = useRoute()
 const props = defineProps<{
   open: boolean
 }>()
-const sidebarGroups = computed<any[]>(() => {
+const sidebarGroups = computed<any>(() => {
   const path = decodeURIComponent(route.path).split('/')
-  console.log(sideBarGenerator(`/${path[2]}/${path[3]}/`))
   return sideBarGenerator(`/${path[2]}/${path[3]}/`)
 })
 

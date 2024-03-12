@@ -18,7 +18,13 @@ export default defineConfig({
                 {
                     find: /^.*\/VPSidebar\.vue$/,
                     replacement: fileURLToPath(
-                        new URL('./theme/components/MyVpSideBar.vue', import.meta.url)
+                        new URL('./theme/components/MyVpSidebar.vue', import.meta.url)
+                    )
+                },
+                {
+                    find: /^.*\/VPHome\.vue$/,
+                    replacement: fileURLToPath(
+                        new URL('./theme/components/MyVPHome.vue', import.meta.url)
                     )
                 }
             ]

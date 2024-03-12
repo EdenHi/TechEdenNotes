@@ -16,15 +16,24 @@
              class="w-20 h-20 rounded-36" alt="avatar">
         <div class="flex flex-col flex-1 justify-between text-2xl text-right">
           <span>Eden</span>
-          <span>Yi Zhang</span>
+          <span>Zhang</span>
         </div>
       </div>
       <hr class="!mt-0">
-      <div class="h-60"></div>
+      <div class="px-4 text-xl leading-10">
+        <span class="text-[var(--vp-c-brand-next)] font-bold">
+        先问对不对，再问为什么。
+        </span>
+        <br>
+        男，23岁，金牛。
+      </div>
+      <hr class="!mt-0">
+      <div class="truncate px-4 pb-4 text-xl leading-10">
+        <a href="mailto:EdenZhang0424@outlook.com">EdenZhang0424@outlook.com</a>
+      </div>
     </div>
   </div>
 </template>
-
 <script setup lang="ts">
 import {ref, onMounted, onUnmounted} from 'vue'
 import {data} from '../../../../scripts/posts.data'
