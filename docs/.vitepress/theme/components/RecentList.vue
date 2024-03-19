@@ -1,16 +1,16 @@
 <template>
-  <div id="doc-container" ref="listRef">
+  <div id="doc-container" class="flex flex-col" ref="listRef">
     <div class="doc-outer-box">
       <div class="doc-item" @click="router.go(withBase(post.url||''))" v-for="post in showItems" :key="post.url">
-        <img class="illustration" :src="withBase(post.frontmatter.img||'')" alt="">
+        <img class="illustration" :src="withBase(post.frontmatter.img||'/empty.svg')" alt="">
         <div class="doc-preview">
           <div class="doc-preview-title">{{ post.frontmatter.title }}</div>
-          <div class="doc-preview-tag"><span v-for="tag in post.frontmatter.tags">{{ tag }}</span></div>
+          <div class="doc-preview-tag hidden md-flex"><span v-for="tag in post.frontmatter.tags">{{ tag }}</span></div>
           <div class="doc-preview-describe">{{ post.frontmatter.describe }}</div>
         </div>
       </div>
     </div>
-    <div class="resume xl-flex sm-hidden" ref="resumeRef">
+    <div class="resume" ref="resumeRef">
       <div class="flex p-5 justify-between">
         <img src="https://avatars.githubusercontent.com/u/90376120?s=400&u=b647b1d8d7273465a9cf3800ed76d9a10db170e1&v=4"
              class="w-20 h-20 rounded-36" alt="avatar">
@@ -25,7 +25,7 @@
         先问对不对，再问为什么。
         </span>
         <br>
-        男，23岁，金牛。
+        男，23岁，金牛，杭州。
       </div>
       <hr class="!mt-0">
       <div class="truncate px-4 pb-4 text-xl leading-10">
@@ -60,7 +60,7 @@ const listRef = ref<HTMLElement>()
 const resumeRef = ref<HTMLElement>()
 const onScroll = () => {
   if (disableLoad.value) return
-  if (listRef.value && resumeRef.value) {
+  if (listRef.value && resumeRef.value && !window.matchMedia("(max-width: 767px)").matches) {
     if (!resumeRef.value.style.position) resumeRef.value.style.position = 'absolute'
     const top = listRef.value?.getBoundingClientRect().top
     const margin = listRef.value?.getBoundingClientRect().left.toFixed()
@@ -96,8 +96,7 @@ onUnmounted(() => {
 
 @media screen and (min-width: 900px) {
   .doc-item {
-    width: 100%
-
+    width: 100%;
   }
 
   .doc-outer-box {
@@ -109,6 +108,14 @@ onUnmounted(() => {
     width: 200px;
     height: 200px;
   }
+
+  .resume {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 300px;
+
+  }
 }
 
 @media screen and (max-width: 900px) {
@@ -117,7 +124,8 @@ onUnmounted(() => {
   }
 
   .doc-outer-box {
-    width: 100%
+    width: 100%;
+    height: 100px;
 
   }
 
@@ -159,7 +167,10 @@ onUnmounted(() => {
 .doc-preview-tag > span {
   margin-right: 10px;
   padding: 5px 10px;
-  border: 1px solid skyblue;
+  color: var(--vp-c-brand-1);
+  font-weight: bold;
+  border: 1px dotted;
+  //background: var(--vp-c-brand-1);
   border-radius: 10px;
 }
 
@@ -172,15 +183,11 @@ onUnmounted(() => {
 }
 
 .resume {
-  width: 300px;
   height: auto;
   background-color: var(--vp-c-bg-alt);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 0;
-  right: 0;
 }
 
 .sidebar > a {
