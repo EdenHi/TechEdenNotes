@@ -1,4 +1,4 @@
-import {data} from "./posts.data";
+import {data as posts} from "./posts.data";
 
 interface Item {
     text: string;
@@ -48,6 +48,7 @@ function sortAndRemoveNumberPrefix(input: Section[] | Item[]): any {
 
 export default function sidebarGenerator(path?: string) {
     const result: IRouteConfig = {}
+    const data = Object.values(posts).flat()
     for (const i of data) {
         const splitUrl = i.url.split('/')
         if (splitUrl.length > 5) return new Error('warning!')
