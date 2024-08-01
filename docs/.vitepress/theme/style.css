@@ -51,8 +51,8 @@
  * -------------------------------------------------------------------------- */
 
 :root {
-    --vp-font-family-base: "SourceHanSerifCN";
-    --vp-font-family-mono: "FiraCode";
+    --vp-font-family-base: "SourceHanSerifCN" !important;
+    --vp-font-family-mono: "FiraCode" !important;
 }
 
 :root {
